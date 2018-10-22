@@ -1,0 +1,117 @@
+<! DOCTYPE html>
+
+
+<html>
+
+<head>
+
+    <title id="title" name="title">
+        <%= prenom %>
+    </title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../contenu/css/style.css" type="text/css" />
+
+</head>
+
+
+<body>
+    <div id="bloc_page">
+        <header>
+            <div id="titre_principal">
+                <h1>Salon de <%=prenom%> </h1>
+            </div>
+        </header>
+        <p id="Bienvenue">Bienvenue
+            <%= prenom %> ! <a href="/" id="deconnecter" name="deconnecter"> Deconnexion</a> </p>
+        <a href="#">
+            <p id="profil_User">(voir profil)</p>
+        </a>
+
+
+        <div id="banniere_image_user"> </div>
+
+        <aside id="Chat">
+
+
+            <div id="zone_chat">
+
+
+
+            </div>
+
+            <p id="saisieMessageChat">
+                <%= prenom %>: <input type="text" id="messageChat" name="messageChat" /> <input type="button" id="envoyerMessage" name="envoyerMessage" placeholder="Votre message..." value="Envoyer"></p>
+
+
+        </aside>
+
+
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+
+        <script type="text/javascript">
+            var socket = io.connect("http://localhost:8080/");
+
+
+
+            var prenomUtil = "<%= prenom %>";
+
+
+            //1) Envoie de l'identifiant
+            socket.emit('login', prenomUtil);
+
+            $('#zone_chat').append('<p id="Arrivant" >' + prenomUtil + ' a rejoint le chat </p>');
+
+
+
+            //4) Reception du mesage de bienvenue et affichage  
+            socket.on('nouveau_Utilisateur', function(data) {
+                $('#zone_chat').append('<p>' + data.prenom + ' ' + data.message + "</p>");
+            });
+
+
+
+
+            //7)Reception message et affichage 
+            socket.on('message', function(data) {
+                if (data.prenom != prenomUtil) {
+                    $('#zone_chat').append('<p><strong>' + data.prenom + ':</strong> ' + data.message2 + "</p>");
+                }
+
+            });
+
+            //10)Reception de deconnection
+            socket.on('deco', function(data) {
+                $('#zone_chat').append('<p >' + data + "</p>");
+            });
+
+
+            //5)Envoi d'un message
+            $('#envoyerMessage').click(function() {
+
+                var message = $('#messageChat').val();
+
+                socket.emit('message', {
+                    message: message,
+                    prenom: prenomUtil
+                });
+
+                $('#zone_chat').append('<p><strong>' + prenomUtil + ':</strong> ' + message + "</p>");
+                $('#messageChat').val('').focus();
+                return false;
+            });
+
+
+            //8)Deconnection
+            $('#deconnecter').click(function() {
+                socket.emit('discon', prenomUtil + '  a quitté le chat');
+                $('#zone_chat').append('<p id="disconnect">' + prenomUtil + " a quitté le chat  </p>");
+                $('#deconnecter').prop('disabled', "disabled");
+            });
+
+        </script>
+
+    </div>
+</body>
+
+</html>

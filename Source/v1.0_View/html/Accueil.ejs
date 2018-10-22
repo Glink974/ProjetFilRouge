@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="../contenu/css/style.css" type="text/css" />
+        <title>Events for Events</title> 
+    </head>
+    
+    <body>
+        <div id="bloc_page">
+            <header>
+                <div id="titre_principal">
+                    <h1>EVENEMENT FOR EVENTS</h1>
+                </div>
+            </header>
+            
+            <div id="banniere_image">
+            
+            </div>
+            <div id="banniere_connexion">
+            <p>
+            Connectez-vous pour profiter de toutes les fonctionnalités de l'application Web. BOUM!</p>
+            <form method="post" action="/Utilisateur/TraitementConnexion">
+                
+                    <div id="connexion">
+                    <p>
+                    <label for="Identifiant">Veuillez saisir votre identifiant</label> : <input type="text" name="identifiant" id="identifiant" size="20"/><br/><br/>
+                    
+                    <label for="Mot de Passe">Veuillez saisir votre mot de passe</label> : <input type="password" name="pass" autocomplete="off"  id="pass" size="20"/><br/><br/>
+                    
+                    <input type="submit" value="Se connecter"/>
+                 </p>
+                </div>
+                   
+                <a id="lien_inscription" href="/Utilisateur/Inscription">Cliquez là pour vous s'inscrire</a>
+                    <br/><br/>
+                
+                <span id="ErreurConnexion">
+                
+                <% if(prenom == ''){ %>
+                        <p> Identifiant ou mots de passe incorrect </p>
+                    
+                    <% } %>
+                
+                </span>
+                
+            </form>                
+            </div>
+            <section>
+                <article>
+                    <h1>Bienvenue sur notre site</h1>
+                    
+                    <p>Vous trouverez ici une large liste d'événements culturels de la région Occitanie. En effet, si vous ne savez pas quoi faire ce soir, jettez un coup d'oeil ici. Vous pouvez trouver un événement sportif, musical et même créer vos propre événements entre amis ! Si vous êtes fan de foot, vous trouverez le prochain match de foot à venir. Idem si vous êtes férus de musique, on vous propose d'accéder à la liste des prochains concerts.
+                    A vos souris et bonne visite.</p>
+                </article><br/><br/>
+            
+                <aside>
+                    <h1>Top Events du jour ou de la semaine</h1>
+                    
+                    <p id='top'>Voilà les meilleurs événements en prévision :</p><br/>
+                    
+                   
+                    <% if(resultsTop.length > 0){ %>
+                        <ol>
+                      <% for(var i=0; i<resultsTop.length;i++){ %>
+                            
+                          <li> <%= resultsTop[i].nom %>, <%= resultsTop[i].participants %> participants <a href= <%= resultsTop[i].lien %>> lien direct </a>  </li>
+                          
+                        <% } %> 
+                        </ol>
+                    <% } %>
+                    
+                    
+                    
+                  
+                    
+                </aside>
+            </section>
+            
+            <footer>
+                <div id="photosEvents_passees">
+                    <h1>Evénements passés</h1>
+                    <p><img src="../contenu/images/photo1.jpg" alt="Photographie" /><img src="../contenu/images/photo2.jpg" alt="Photographie" /><img src="../contenu/images/photo3.jpg" alt="Photographie" /><img src="../contenu/images/photo4.jpg" alt="Photographie" /></p>
+                </div>
+                
+                <div id="contact">
+                    <a href="#" title="Ciquez pour y accéder"><strong>CONTACT</strong></a>
+                </div>
+                <div id="a_propos">
+                    <a href="#" title="Ciquez pour y accéder"><strong>A PROPOS</strong></a>
+                </div>
+            </footer>
+        </div>
+        
+        
+    </body>
+    
+</html>
