@@ -12,11 +12,24 @@ var bodyParser = require('body-parser');
 var mysql = require('mysql');
 
 var io = require('socket.io');
+
+
+
+
+
+
 var session = require("express-session")({
     secret: 'secret',
     resave: true,
     saveUninitialized:true
 });
+
+
+
+
+
+
+
 var sharedsession = require("express-socket.io-session");
 
 
@@ -67,9 +80,6 @@ app.set('socketio',io);
 
 
 
-
-
-
 app.use(function (req, res, next) {
 
     if (typeof (req.session.prenomUtilisateurConnecter) == 'undefined') {
@@ -101,12 +111,13 @@ app.get('/', async function (req, res) {
     vm.runInThisContext(contentModel);
 
 
-    var resultsTop = await afficherTop(3);
+    var resultsTop = await afficherTop(5);
 
 
     res.render('../../v1.0_View/html/Accueil.ejs', {
         resultsTop: resultsTop,
         prenom: req.session.prenomUtilisateurConnecter
+        //mdp: req.session.mdpUtilisateurConnecter
     });
 
 

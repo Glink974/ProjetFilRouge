@@ -43,7 +43,7 @@ var cryptr = new Cryptr('mySecretKey');
 router.use(session({
     secret: 'secret',
     resave: false,
-    saveUninitialized:false
+    saveUninitialized: false
 }));
 
 
@@ -149,9 +149,7 @@ router.post('/TraitementConnexion', urlencodedParser, async function (req, res) 
 
     var utilisateur = await connexionUtilisateur(iden);
 
-
-    req.session.prenomUtilisateurConnecter = utilisateur.getPrenom();
-
+    
     var mdpRenvoyer = utilisateur.getMots_de_passe();
 
 
@@ -160,16 +158,13 @@ router.post('/TraitementConnexion', urlencodedParser, async function (req, res) 
         mdpRenvoyer = cryptr.decrypt(mdpRenvoyer);
     }
 
-
-
-
-    if (mdp == mdpRenvoyer) {
-
-        res.redirect('/Utilisateur/PageUser');
+    if ( iden=='' || mdp=='' || utilisateur.getPrenom() == '' || mdp != mdpRenvoyer ) {
+        req.session.prenomUtilisateurConnecter ='';
+        res.redirect('/');
 
     } else {
-
-        res.redirect('/');
+        req.session.prenomUtilisateurConnecter = utilisateur.getPrenom();
+        res.redirect('/Utilisateur/PageUser');
 
     }
 
@@ -196,12 +191,12 @@ router.get('/PageUser', function (req, res) {
         socket.on("login", function (userdata) {
             socket.handshake.session.userdata = userdata;
             socket.handshake.session.save();
-            
-            console.log( socket.handshake.session.userdata+" vient de se connecter !");
-           
+
+            console.log(socket.handshake.session.userdata + " vient de se connecter !");
+
             //3)envoie message aux autres clients
             socket.broadcast.emit('nouveau_Utilisateur', {
-                prenom:  socket.handshake.session.userdata,
+                prenom: socket.handshake.session.userdata,
                 message: " a rejoint le chat "
             });
 
@@ -211,8 +206,8 @@ router.get('/PageUser', function (req, res) {
 
         //6)Reception message et renvoie partout
         socket.on('message', function (data) {
-            
-            
+
+
             var message = ent.encode(data.message);
             var prenom = ent.encode(data.prenom);
             console.log(prenom + ' me parle ! Il me dit : ' + message);
@@ -224,7 +219,7 @@ router.get('/PageUser', function (req, res) {
             });
 
         });
-        
+
         //9)Reception du message de deconnexion
         socket.on('discon', function (message) {
             message = ent.encode(message);

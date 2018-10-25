@@ -157,7 +157,7 @@ aside img {
 footer {
     display: flex;
     padding-top: 2px;
-    margin-top: 60px;
+    margin-top: 470px;
     background-color: dimgrey;
     color: bisque;
     font-family: comic sans ms, fantasy;
@@ -208,16 +208,28 @@ strong {
 }
 
 
+
+
+#ErreurConnexion {
+    color: red;
+}
+
+
 /*     Formulaire Inscription        */
 
 
-#retour {
-    font-weight: small;
-
+#retour{
+    color: red;
+    position: relative;
+    top: 85px;
+    left: 25px;
+    font-size: 10px;
+    
 
 }
 
 #FormulaireInscription {
+    background-color: dimgray;
     margin-top: 100px;
     margin-left: 40px;
     border-style: solid;
@@ -227,12 +239,13 @@ strong {
 
 #FormulaireInscription,
 p {
-    margin-left: 50px;
+    text-align: center;
+
 }
 
 
-
 #nomSaisie {
+    margin-top: 30px;
     margin-left: 180px;
 }
 
@@ -240,26 +253,74 @@ p {
     margin-left: 158px;
 }
 
-#emailSaisie {
-    margin-left: 173px;
+
+
+
+#email {
+    margin-right: 175px;
 }
+
+#emailSaisie {
+    margin-right: 45px;
+}
+
+
+
 
 #mdpSaisie {
-    margin-left: 108px;
+    margin-left: 165px;
 }
 
+
+
+
+#confirm {
+    margin-right: 100px;
+}
+
+
 #confirmSaisie {
-    margin-left: 9px;
+    margin-right: 85px;
+}
+
+
+
+
+#ville {
+    margin-right: 180px;
+
 }
 
 #villeSaisie {
-    margin-left: 180px;
+    margin-right: 40px;
 }
 
 
+
+
+#Precedent {
+    display: flex;
+    bottom: 150px;
+    margin-left: 50px;
+}
+
+
+#Suivant {
+    display: flex;
+    bottom: 150px;
+    position: relative;
+    left: 900px;
+    bottom: 25px;
+
+}
+
+
+
 #Valider {
+    
     margin-top: 30px;
-    margin-left: 180px;
+    margin-left: 450px;
+   
 }
 
 
@@ -321,31 +382,31 @@ p {
     top: 25px;
     right: 75px;
     font-size: 9px;
-    
-   
+
+
 }
 
 
 #Chat {
     background-color: aliceblue;
     position: absolute;
-    top: 500px;
+    top: 350px;
     right: 0px;
     color: black;
-   
+
     height: 410px;
-    width: 434px ;
+    width: 434px;
     overflow: auto;
 }
 
 
 #zone_chat {
-    
+
     height: 300px;
-    width: 434px ;
+    width: 433px;
     overflow: auto;
-  
-    
+
+
 }
 
 #saisieMessageChat {
@@ -354,27 +415,16 @@ p {
     padding-left: 15px;
     border: solid;
     border-style: double;
-    
+
 }
 
 
 
 
-#Arrivant{
+#Arrivant {
     color: green;
-    
+
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

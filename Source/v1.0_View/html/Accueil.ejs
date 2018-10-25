@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
         <meta charset="utf-8"/>
         <link rel="stylesheet" href="../contenu/css/style.css" type="text/css" />
-        <title>Events for Events</title> 
+        <title>Events for Events</title>  
+        <script type="text/javascript" src="../js/footer.js" ></script>
+    
     </head>
     
     <body>
@@ -34,17 +37,18 @@
                    
                 <a id="lien_inscription" href="/Utilisateur/Inscription">Cliquez là pour vous s'inscrire</a>
                     <br/><br/>
+               
                 
+            </form>  
+                 
                 <span id="ErreurConnexion">
                 
                 <% if(prenom == ''){ %>
                         <p> Identifiant ou mots de passe incorrect </p>
-                    
                     <% } %>
                 
                 </span>
                 
-            </form>                
             </div>
             <section>
                 <article>
@@ -64,7 +68,7 @@
                         <ol>
                       <% for(var i=0; i<resultsTop.length;i++){ %>
                             
-                          <li> <%= resultsTop[i].nom %>, <%= resultsTop[i].participants %> participants <a href= <%= resultsTop[i].lien %>> lien direct </a>  </li>
+                          <li> <%= resultsTop[i].nom %>, <%= resultsTop[i].participants %> participants <a href="<%=resultsTop[i].lien%>" > lien direct </a>  </li>
                           
                         <% } %> 
                         </ol>
@@ -77,22 +81,10 @@
                 </aside>
             </section>
             
-            <footer>
-                <div id="photosEvents_passees">
-                    <h1>Evénements passés</h1>
-                    <p><img src="../contenu/images/photo1.jpg" alt="Photographie" /><img src="../contenu/images/photo2.jpg" alt="Photographie" /><img src="../contenu/images/photo3.jpg" alt="Photographie" /><img src="../contenu/images/photo4.jpg" alt="Photographie" /></p>
-                </div>
-                
-                <div id="contact">
-                    <a href="#" title="Ciquez pour y accéder"><strong>CONTACT</strong></a>
-                </div>
-                <div id="a_propos">
-                    <a href="#" title="Ciquez pour y accéder"><strong>A PROPOS</strong></a>
-                </div>
-            </footer>
+           
         </div>
-        
-        
+        <footer id="footer"></footer>
+        <script type="text/javascript" >footer()</script>
     </body>
     
 </html>
