@@ -1,6 +1,5 @@
 <! DOCTYPE html>
 
-
 <html>
 
 <head>
@@ -10,8 +9,14 @@
     </title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../contenu/css/style.css" type="text/css" />
-
     <script type="text/javascript" src="../js/footer.js"></script>
+    <script type="text/javascript" src="../js/Menu.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 
@@ -31,14 +36,48 @@
 
 
 
-        <p id="Bienvenue">Bienvenue
-            <%= prenom %> ! <a href="/" id="deconnecter" name="deconnecter"> Deconnexion</a> </p>
-        <a href="#">
-            <p id="profil_User">(voir profil)</p>
+        <p id="Bienvenue"><img id='Imgco' src='../contenu/images/icons-statut-de-connexion-on.png'>Bienvenue
+            <%= prenom %> ! <a href="/" id="deconnecter" name="deconnecter">Deconnexion<img id='Imgdeco' src='../contenu/images/icons-fermer-.png'> </a> </p>
+        <a href="#Profil">
+            <p id="profil_user">(voir profil)</p>
         </a>
 
 
         <div id="banniere_image_user"> </div>
+
+
+
+
+        <div id='Profil'>
+            <div class="popup_block">
+
+                <a href="#" class="close">X</a>
+                <form method='POST' action='/Utilisateur/TraitementProfil'>
+
+                    <div class="form-group row">
+                        <p><label id='NomUtil'>Nom: </label> <input type='text' id='Champs_Nom_Util' /><img src='../contenu/images/icons-modifier.png'>
+                        </p>
+                    </div>
+
+                    <div class="form-group row">
+                        <p><label id='PrenomUtil'>Prenom:</label><input type='text' id='Champs_Prenom_Util' /><img src='../contenu/images/icons-modifier.png'>
+                        </p>
+                    </div>
+
+                    <div class="form-group row">
+                        <p><label id='PrenomUtil'>Ville:</label><input type='text' id='Champs_Ville_Util' /><img src='../contenu/images/icons-modifier.png'>
+                        </p>
+                    </div>
+                    <input class="btn btn-primary" id='modif' type="submit" value="Modifier">
+                </form>
+
+            </div>
+        </div>
+
+        <div id="menu">
+        </div>
+
+
 
         <aside id="Chat">
 
@@ -60,18 +99,12 @@
     </div>
 
 
-
-
-
-
-
-
-
-
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js">
     </script>
+
+
 
 
 
@@ -92,21 +125,21 @@
 
         //4) Reception du mesage de bienvenue et affichage  
         socket.on('nouveau_Utilisateur', function(data) {
-            $('#zone_chat').append('<p>' + data.prenom + ' ' + data.message + "</p>");
+            $('#zone_chat').append('<p id="Arrivant" >' + data.prenom + ' ' + data.message + "</p>");
         });
 
 
         //7)Reception message et affichage 
         socket.on('message', function(data) {
             if (data.prenom != prenomUtil) {
-                $('#zone_chat').append('<p><strong>' + data.prenom + ':</strong> ' + data.message2 + "</p>");
+                $('#zone_chat').append('<p><strong id="nom_user">' + data.prenom + ':</strong> ' + data.message + "</p>");
             }
 
         });
 
         //10)Reception de deconnection
         socket.on('deco', function(data) {
-            $('#zone_chat').append('<p>' + data + "</p>");
+            $('#zone_chat').append('<p  id="disconnect">' + data + "</p>");
         });
 
 
@@ -133,8 +166,60 @@
             $('#deconnecter').prop('disabled', "disabled");
         });
 
-    </script>
+        //-------------------------- popUp -----------------------------------------------------------
+        
+        
+        jQuery(function($) {
 
+            //Lorsque vous cliquez sur un lien de la classe poplight
+            $('a.popup_block').on('click', function() {
+                var popID = $(this).data('rel'); //Trouver la pop-up correspondante
+                var popWidth = $(this).data('width'); //Trouver la largeur
+
+                //Faire apparaitre la pop-up et ajouter le bouton de fermeture
+                $('#' + popID).fadeIn().css({
+                    'width': popWidth
+                }).prepend('<a href="#" class="close">X</a>');
+
+                //Récupération du margin, qui permettra de centrer la fenêtre - on ajuste de 80px en conformité avec le CSS
+                var popMargTop = ($('#' + popID).height() + 80) / 2;
+                var popMargLeft = ($('#' + popID).width() + 80) / 2;
+
+                //Apply Margin to Popup
+                $('#' + popID).css({
+                    'margin-top': -popMargTop,
+                    'margin-left': -popMargLeft
+                });
+
+                //Apparition du fond - .css({'filter' : 'alpha(opacity=80)'}) pour corriger les bogues d'anciennes versions de IE
+                $('body').append('<div id="fade"></div>');
+                $('#fade').css({
+                    'filter': 'alpha(opacity=80)'
+                }).fadeIn();
+
+                return false;
+            });
+
+
+            //Close Popups and Fade Layer
+            $('#body').on('click', 'a.close, #fade', function() { //Au clic sur le body...
+                $('#fade , .popup_block').fadeOut(function() {
+                    $('#fade, a.close').remove();
+                }); //...ils disparaissent ensemble
+
+                return false;
+            });
+
+
+        });
+
+    </script>
+    
+    <script type="text/javascript">
+        
+        Menu()
+    
+    </script>
 
 
     <script type="text/javascript">

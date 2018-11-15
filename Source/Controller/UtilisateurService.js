@@ -2,11 +2,31 @@ var express = require('express');
 var http = require('http');
 
 
+
+
+var router = express.Router();
+
+
+var server;
+
+var io;
+
+
+
+var session = require("express-session")({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+});
+
+
+var sharedsession = require("express-socket.io-session");
+
 var bodyParser = require('body-parser');
 
-var express = require('express');
-
 var fs = require('fs');
+
+
 var vm = require('vm');
 
 var mysql = require('mysql');
@@ -17,34 +37,56 @@ var async = require('async');
 var ent = require('ent');
 
 
-var session = require("express-session");
+//Mailing
+
+var nodemailer = require('nodemailer');
 
 
-
-
-
-
-var router = express.Router();
 
 //---------------------------------- Configuration -------------------------------------------
+
+
+
+
+
+
+
+
 
 var urlencodedParser = bodyParser.urlencoded({
     extended: true
 });
 
 
+
+
 var contentBD = fs.readFileSync('./Persistence.js');
 var contentModelUtilisateur = fs.readFileSync('../Model/Utilisateur.js');
+
 
 
 var cryptr = new Cryptr('mySecretKey');
 
 
-router.use(session({
-    secret: 'secret',
-    resave: false,
-    saveUninitialized: false
-}));
+
+
+
+
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    //port: 587,
+    //secure: false,
+    auth: {
+        user: 'gillessilotia@gmail.com',
+        pass: 'azerty974'
+    }
+});
+
+
+
+
+
+
 
 
 
@@ -59,9 +101,22 @@ router.use(function (req, res, next) {
         req.session.prenomUtilisateurConnecter = 'p';
     }
 
+    server = req.app.get('server');
+
+    io = req.app.get('socketio');
+
+    io = require("socket.io")(server),
+        session = req.app.get('session');
+    session.io = io;
+
+
+
     next();
 });
 
+
+
+router.use(session);
 
 
 
@@ -118,6 +173,29 @@ router.post('/traitementInscription', urlencodedParser, function (req, res) {
 
     if (req.session.erreurs.length == 0) {
         ajouterUtilisateur(utilisateur);
+
+        //Envoie du mail
+
+        var testMessage = 'Félicitation ' + nom + ', votre compte a bien été creer ! '
+        var mailOptions = {
+            from: 'gillessilotia@gmail.com',
+            to: email,
+            subject: 'Confirmation Email using Node.js ',
+            text: testMessage
+        };
+
+
+
+
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email envoyé: ' + info.response);
+            }
+        });
+
+        transporter.close();
     }
 
 
@@ -149,7 +227,7 @@ router.post('/TraitementConnexion', urlencodedParser, async function (req, res) 
 
     var utilisateur = await connexionUtilisateur(iden);
 
-    
+
     var mdpRenvoyer = utilisateur.getMots_de_passe();
 
 
@@ -158,8 +236,8 @@ router.post('/TraitementConnexion', urlencodedParser, async function (req, res) 
         mdpRenvoyer = cryptr.decrypt(mdpRenvoyer);
     }
 
-    if ( iden=='' || mdp=='' || utilisateur.getPrenom() == '' || mdp != mdpRenvoyer ) {
-        req.session.prenomUtilisateurConnecter ='';
+    if (iden == '' || mdp == '' || utilisateur.getPrenom() == '' || mdp != mdpRenvoyer) {
+        req.session.prenomUtilisateurConnecter = '';
         res.redirect('/');
 
     } else {
@@ -183,7 +261,9 @@ router.get('/PageUser', function (req, res) {
     });
 
 
-    var io = req.app.get('socketio');
+    io.use(sharedsession(session));
+
+
 
     io.on('connection', function (socket) {
 
@@ -215,7 +295,7 @@ router.get('/PageUser', function (req, res) {
 
             socket.broadcast.emit('message', {
                 prenom: prenom,
-                message2: message
+                message: message
             });
 
         });
@@ -231,6 +311,7 @@ router.get('/PageUser', function (req, res) {
     });
 
 });
+
 
 
 //---------------------------------------- Deconnexion -----------------------------------------------

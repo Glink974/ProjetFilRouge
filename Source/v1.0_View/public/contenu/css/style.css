@@ -1,33 +1,10 @@
 /*Feuille style CSS*/
 /*Définition des polices personnalisées*/
 
-@font-face {
-    font-family: 'BallparkWeiner'
-        src: url('polices/ballpark.eot');
-    src: url('polices/ballpark.eot?#iefix') format('embedded-opentype'),
-        url('polices/ballpark.woff') format('woff'),
-        url('polices/ballpark.tt') format('truetype'),
-        url('polices/ballpark.svg#BallparkWeiner') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Dayrom';
-    src: url('polices/dayrom.eot');
-    src: url('polices/dayrom.eot#iefix') format('embedded-opentype'),
-        url(polices/dayrom.woff) format('woff'),
-        url(polices/dayrom.ttf) format('truetype'),
-        url(polices/dayrom.svg#Dayrom) format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
 /*Elémens principaux de la page*/
 
 body {
     background: url('../images/fond.jpg') repeat fixed;
-    /*background-color: rgb(251, 245, 134);*/
     font-family: verdana, sans-serif;
     color: rgb(215, 215, 215);
 
@@ -37,6 +14,24 @@ body {
     width: 1280px;
     margin: auto;
 }
+
+#logo {
+    width: 100px;
+    height: 100px;
+}
+
+#Imgdeco {
+    width: 15px;
+    height: 15px;
+}
+
+
+
+#Imgco {
+    width: 15px;
+    height: 15px;
+}
+
 
 section h1,
 footer h1,
@@ -95,9 +90,22 @@ header h2 {
     padding-top: 5px;
     padding-left: 4px;
     margin-left: 130px;
+    
     background-color: #706b64;
     color: white;
-    font-size: 0.8em;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+
+
+
+#identifiant{
+    color:black;
+}
+
+#pass {
+    color: black;
 }
 
 #connexion {
@@ -105,8 +113,11 @@ header h2 {
 }
 
 #lien_inscription {
+    position: relative;
+    right: 42%;
+    bottom: 25px;
     color: white;
-    text-align: center;
+
 
 }
 
@@ -117,32 +128,50 @@ section {
     margin-bottom: 10px;
 }
 
-article,
-aside {
-    text-align: justify;
-}
+
 
 article {
-    margin-left: 130px;
     flex: auto;
-    width: 40%;
+    flex-direction: row;
+    position: absolute;
+    background-color: #706b64;
+    box-shadow: 0px 2px 5px #1c1a19;
+    border-radius: 5px;
+    margin-left: 310px;
+    margin-top: 20px;
+    width: 51%;
+ 
+    color: white;
+    
 }
 
-article p {
-    font-size: 0.8em;
+article h2 {
     text-align: center;
+    color: beige;
+    
+}
+
+article li {
+    font-size: 1em;
+    
+}
+
+article a {
+    
+    color:darkorange;
 }
 
 aside {
     flex: auto;
-    position: relative;
+    flex-direction: row;
+    position: absolute;
     background-color: #706b64;
     box-shadow: 0px 2px 5px #1c1a19;
     border-radius: 5px;
     padding-top: 15px;
     margin-top: 20px;
-    margin-left: 15px;
-    margin-right: 120px;
+    margin-left: 850px;
+    margin-right: 0px;
     color: white;
     font-size: 0.9em;
 }
@@ -151,6 +180,65 @@ aside img {
     padding-left: 120px;
 }
 
+
+/* Menu */
+
+#menu {
+    
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    background-color: #706b64;
+    box-shadow: 0px 2px 5px #1c1a19;
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    margin-top: 20px;
+    margin-left: 0px;
+    margin-right: 580px;
+    color: white;
+    font-family: comic sans ms, fantasy;
+}
+
+nav {
+    
+    padding-left: 0px;
+}
+
+nav ul {
+    margin-top: 20px;
+    padding-left: 15px;
+    list-style-type: none;
+   
+}
+
+nav li {
+    
+    margin-right: 15px;
+    margin-bottom: 20px;
+}
+
+nav a {
+    
+    font-size: 0.8em;
+    padding-bottom: 2px;
+    text-decoration: none;
+    color: white;
+}
+
+nav a:hover {
+    
+    color: lightyellow;
+    border-bottom: 3px solid lightyellow;
+    box-shadow: 1px 3px 6px #1c1a19;
+}
+
+nav, h1 {
+    
+    font-size: 1.3em;
+    text-align: center;
+}
 
 /*Footer*/
 
@@ -188,48 +276,98 @@ footer h1 {
 }
 
 #contact {
-    padding-left: 10px;
-    padding-top: 40px;
+    position: relative;
+    bottom: 75px;
+    left: 1000px;
+
+
     display: block;
     width: 14%;
-    font-size: 0.8em;
+    font-size: 0.9em;
 
 }
 
+
+#Parti{
+   margin-left: 150px;
+}
+
+
 #a_propos {
-    padding-top: 40px;
+    position: relative;
+    bottom: 90px;
+    left: 750px;
     display: block;
     width: 14%;
-    font-size: 0.8em;
+    font-size: 0.9em;
 }
 
 strong {
-    color: bisque;
+    color:bisque;
 }
 
+
+#nom_user{
+    color:deepskyblue;
+}
 
 
 
 #ErreurConnexion {
+    position: relative;
+    bottom: 45px;
     color: red;
+
 }
+
+
+
+
+
+#Bienvenue_Site{
+    display: none;
+    position: fixed;
+    top:0; right:0; bottom:0; left:0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+#Bienvenue_Site:target{
+    display: block;
+}
+.popup_block{
+    background: #fff;
+    padding: 20px;
+    border: 20px solid #ddd;
+    position: relative;
+    margin: 10% auto;
+    width: 40%;
+    box-shadow: 0px 0px 20px #000;
+    border-radius: 10px;
+}
+
 
 
 /*     Formulaire Inscription        */
 
+#titre_inscription {
+    margin-top: 15px;
+    text-decoration: underline;
+}
 
-#retour{
+
+
+#retour {
     color: red;
     position: relative;
-    top: 85px;
-    left: 25px;
-    font-size: 10px;
-    
+    top: 95px;
+    left: 45px;
+    font-size: 12px;
+
 
 }
 
 #FormulaireInscription {
-    background-color: dimgray;
+    background-color: lightgray;
     margin-top: 100px;
     margin-left: 40px;
     border-style: solid;
@@ -237,16 +375,16 @@ strong {
 }
 
 
-#FormulaireInscription,
-p {
+#FormulaireInscription p {
     text-align: center;
+    color: royalblue;
 
 }
 
 
 #nomSaisie {
     margin-top: 30px;
-    margin-left: 180px;
+    margin-left: 175px;
 }
 
 #prenomSaisie {
@@ -257,11 +395,11 @@ p {
 
 
 #email {
-    margin-right: 175px;
+    margin-right: 30px;
 }
 
 #emailSaisie {
-    margin-right: 45px;
+    margin-left: 145px;
 }
 
 
@@ -275,24 +413,24 @@ p {
 
 
 #confirm {
-    margin-right: 100px;
+    margin-right: 10px;
 }
 
 
 #confirmSaisie {
-    margin-right: 85px;
+    margin-left: 50px;
 }
 
 
 
 
 #ville {
-    margin-right: 180px;
+    margin-right: 40px;
 
 }
 
 #villeSaisie {
-    margin-right: 40px;
+    margin-left: 140px;
 }
 
 
@@ -302,42 +440,47 @@ p {
     display: flex;
     bottom: 150px;
     margin-left: 50px;
+
 }
 
 
 #Suivant {
+
     display: flex;
     bottom: 150px;
     position: relative;
-    left: 900px;
+    left: 80%;
     bottom: 25px;
 
 }
 
-
-
 #Valider {
-    
     margin-top: 30px;
     margin-left: 450px;
-   
-}
+    margin-bottom: 15px;
 
+}
 
 
 #erreurNom {
     color: red;
-    margin-left: 50px;
+    position: absolute;
+    left:70%;
+    top: 275px;
 }
 
 #erreurPrenom {
     color: red;
-    margin-left: 50px;
+    position: absolute;
+    left: 70%;
+    top: 310px;
 }
 
 
 #erreurmdp {
-    margin-left: 50px;
+    position: absolute;
+    left: 70%;
+    top: 315px;
 }
 
 
@@ -351,17 +494,22 @@ p {
     color: green;
 }
 
-/*    Page User      */
-
+                                                    /*    Page User      */
 
 #Bienvenue {
     position: absolute;
     top: 5px;
     right: 10px;
     font-size: 10px;
+    color: ghostwhite;
 }
 
 #deconnecter {
+    color: red;
+}
+
+
+#disconnect{
     color: red;
 }
 
@@ -376,15 +524,48 @@ p {
     margin-bottom: 25px;
 }
 
+
+
+
 #profil_User {
     color: red;
     position: absolute;
     top: 25px;
     right: 75px;
     font-size: 9px;
-
-
 }
+
+
+
+#Profil{
+    display: none;
+    position: fixed;
+    top:0; right:0; bottom:0; left:0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+#Profil:target{
+    display: block;
+}
+
+
+
+.popup_block{
+     background: url('../images/fond.jpg') repeat fixed;
+    padding: 20px;
+    border: 20px solid #ddd;
+    position: relative;
+    margin: 10% auto;
+    width: 40%;
+    box-shadow: 0px 0px 20px #000;
+    border-radius: 10px;
+    height: 400px;
+    width: 500px;
+    overflow: auto;
+    border-radius: 10px;
+}
+
+
 
 
 #Chat {
@@ -420,10 +601,67 @@ p {
 
 
 
-
 #Arrivant {
     color: green;
+}
 
+
+
+#Profil p {
+    text-align: center;
+
+}
+
+#Profil img {
+    width:20px;
+    height:20px;
+}
+
+
+#modif {
+    margin-left: 150px;
+    margin-top: 10px;
+}
+
+
+
+#Champs_Nom_Util {
+    background: transparent;
+    border-bottom: 1px dashed #84A3C5;
+    box-shadow: none;
+    border: none;
+    outline: none;
+    height: 25px;
+    width: 50%;
+    margin: 0px auto 20px auto;
+}
+
+#Champs_Prenom_Util {
+     background: transparent;
+    border-bottom: 1px dashed #84A3C5;
+    box-shadow: none;
+    border: none;
+    outline: none;
+    height: 25px;
+    width: 50%;
+    margin: 0px auto 20px auto;
+}
+
+
+#Champs_Ville_Util {
+     background: transparent;
+    border-bottom: 1px dashed #84A3C5;
+    box-shadow: none;
+    border: none;
+    outline: none;
+    height: 25px;
+    width: 50%;
+    margin: 0px auto 20px auto;
+}
+
+
+#Profil input[type=text]{
+    border-bottom: 1px dashed white;
 }
 
 

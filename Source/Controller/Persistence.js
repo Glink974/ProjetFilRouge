@@ -9,7 +9,7 @@ function connexionBD(mysql) {
     mySqlClient = mysql.createConnection({
         host: "localhost",
         user: "root",
-        password: "root",
+        password: "najim",
         database: "gestionevent"
     });
 
@@ -61,7 +61,7 @@ function afficherTop(nombre) {
                 for (var i = 0; i < results.length; i++) {
                     var result = results[i];
 
-                     var evenement = new Evenement();
+                    var evenement = new Evenement();
 
                     var nomEvenement = result['Nom_evenement'];
                     var participants = result['Nombre_de_participants'];
@@ -130,3 +130,54 @@ function connexionUtilisateur(iden) {
 
 
 }
+
+//----------------------------------- Afficher Evénements -------------------------------------
+
+function afficherEvent() {
+
+    var res = [];
+    var selectQuery = "SELECT * FROM evenement";
+
+    return new Promise((resolve, reject) =>
+        mySqlClient.query(selectQuery ,function select(error, results, fields) {
+
+            if (error) {
+                mySqlClient.end();
+                reject(error);
+            }
+
+            if (results.length > 0) {
+                
+                console.log('On va afficher les events!!!!!!!!!!!!!');
+                
+                for (var i = 0; i < results.length; i++) {
+                    var result = results[i];
+
+                    var evenement = new Evenement();
+                    
+                    var nomEvenement = result['Nom_evenement'];
+                    var lieu = result['Lieu'];
+                    var dateEtHeure = result['Date_et_heure'];
+                    var participants = result['Nombre_de_participants'];
+                    var lien = result['Liens'];
+                    var type = result['Type_d_evenement'];
+
+                    evenement.setNom(nomEvenement);
+                    evenement.setLieu(lieu);
+                    evenement.setDate(dateEtHeure);
+                    evenement.setParticipants(participants);
+                    evenement.setLien(lien);
+                    evenement.setType(type);
+                    
+                    res.push(evenement);
+
+                }
+            }
+        
+            resolve(res);
+
+        })
+    );
+
+}
+

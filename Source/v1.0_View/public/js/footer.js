@@ -3,7 +3,7 @@ function footer() {
 
     var footer = document.getElementById("footer");
 
-    var blocPage = document.getElementById("bloc_page");
+    //var blocPage = document.getElementById("bloc_page");
 
 
 
@@ -78,8 +78,5 @@ function footer() {
     footer.appendChild(photosEvent);
     footer.appendChild(contact);
     footer.appendChild(propos);
-
-
-
 
 }

@@ -8,7 +8,9 @@
     <meta charset='utf-8' />
     <link rel="stylesheet" href="../contenu/css/style.css" type="text/css" />
     <script type="text/javascript" src="../js/footer.js"></script>
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -20,40 +22,63 @@
         </header>
 
         <div id="retour">
-            <a href="/">   -retour à l'accueil- </a>
+            <a href="/"> -retour à l'accueil- </a>
         </div>
-        
+
+
         <form id="FormulaireInscription" method="POST" action="/Utilisateur/traitementInscription">
 
-            <p>Veuillez remplir les champs suivants :</p><br />
+            <p id='titre_inscription'>Veuillez remplir les champs suivants :</p><br />
 
-            <p id='NomInscription'>
-                <label> Nom *: </label><input type="text" name="nomSaisie" id="nomSaisie" autocomplete="off" required /> <span id='erreurNom'></span>
-            </p>
-
-            <p id='PrenomInscription'>
-                <label> Prenom *: </label><input type="text" name="prenomSaisie" id="prenomSaisie" autocomplete="off" required /> <span id='erreurPrenom'></span>
-            </p>
-
-            <p id="emailInscription">
-                <label id="email"> Email *: </label><input type="email" name="emailSaisie" id="emailSaisie" autocomplete="off" required />
+            <div class="form-group">
+                <p id='NomInscription'>
+                    <label> Nom *: </label><input type="text" name="nomSaisie" id="nomSaisie" autocomplete="off" required /> <span id='erreurNom'></span>
+                </p>
+            </div>
 
 
-            </p>
+            <div class="form-group">
+                <p id='PrenomInscription'>
+                    <label> Prenom *: </label><input type="text" name="prenomSaisie" id="prenomSaisie" autocomplete="off" required /> <span id='erreurPrenom'></span>
+                </p>
+
+
+            </div>
+            <div class="form-group">
+                <p id="emailInscription">
+                    <label id="email"> Email *: </label><input type="email" name="emailSaisie" id="emailSaisie" autocomplete="off" required />
+
+
+                </p>
+            </div>
 
 
 
-            <p id="villeInscription">
-                <label id="ville"> Ville *: </label><input type="text" name="villeSaisie" autocomplete="off" id="villeSaisie" required />
-            </p>
+            <div class="form-group">
+                <p id="villeInscription">
+                    <label id="ville"> Ville *: </label><input type="text" name="villeSaisie" autocomplete="off" id="villeSaisie" required />
+                </p>
 
-            <input type='button' id="Precedent" value='< Precedent' style="display: none;" />
-            <input type='button' id="Suivant" value='Suivant >' />
+            </div>
+
+
+
+
+            <button type="button" id="Precedent" class="btn btn-primary btn-lg" style="display: none;"> Précedent </button>
+            <button type="button" id="Suivant" class="btn btn-primary btn-lg"> Suivant </button>
+
+
+
+
+
+
+
+
 
             <p id="parapheMdp" style="display: none;">
-                <label id="mdpInscrption"> Mots de passe *: </label><input type="password" name="mdpSaisie" id="mdpSaisie" autocomplete="off" required  /><span id='erreurmdp'></span>
+                <label id="mdpInscrption"> Mots de passe *: </label><input type="password" name="mdpSaisie" id="mdpSaisie" autocomplete="off" required /><span id='erreurmdp'></span>
 
-            </p >
+            </p>
 
             <p id="parapheConfirm" style="display: none;">
                 <label id="confirm"> Confirmation mots de passe *: </label><input type="password" name="confirmSaisie" id="confirmSaisie" autocomplete="off" required /><span id='erreurconfirm'></span>
@@ -63,7 +88,7 @@
 
 
 
-            <input style="display: none;" type='submit' id="Valider" value='Valider'   />
+            <input style="display: none;" type='submit' id="Valider" class="btn btn-success" value='Valider' />
 
 
         </form>
@@ -90,7 +115,7 @@
             <%  }%>
         </span>
 
-        
+
 
 
     </div>
