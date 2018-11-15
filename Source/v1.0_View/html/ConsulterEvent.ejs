@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../contenu/css/style.css" type="text/css" />
+    <title>Events for Events</title>
+    <script type="text/javascript" src="../js/footer.js"></script>
+    <script type="text/javascript" src="../js/Menu.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <div id="bloc_page">
+        <header>
+            <div id="titre_principal">
+                <h1> <img id='logo' src='../contenu/images/logo.png'> EVENEMENT FOR EVENTS</h1>
+            </div>
+        </header>
+
+        <div id="banniere_image">
+
+        </div>
+
+        <div id="menu">
+        </div>
+
+        <section>
+            <article>
+                <div id="listEvent">
+
+                    <h2>Voilà la liste des événements en prévision </h2><br />
+
+                    <% if(resultsEvent.length > 0){ %>
+                    <ol>
+                        <% for(var i=0; i<resultsEvent.length;i++){ %>
+                        
+                        <li>
+                            <strong>NOM : </strong><%= resultsEvent[i].nom %>,
+                            <strong>LIEU : </strong><%= resultsEvent[i].lieu %>,
+                            <strong>DATE ET HEURE : </strong><%= resultsEvent[i].date %>,
+                            <strong>NOMBRE DE PARTICIPANTS : </strong><%= resultsEvent[i].participants %>,
+                            <strong>LIEN DIRECT : </strong><a href="<%=resultsEvent[i].lien%>">ICI</a>,
+                            <strong>TYPE D'EVENEMENT : </strong><%= resultsEvent[i].type %>
+                        </li>
+                        <% } %>
+                    </ol>
+                    <% } %>
+
+                </div>
+            </article>
+
+        
+        </section>
+
+
+    </div>
+
+    <footer id="footer"></footer>
+
+    <script type="text/javascript">
+        var prenom = "<%= prenom %>";
+        Menu(prenom)
+
+    </script>
+    <script type="text/javascript">
+        footer()
+
+    </script>
+
+</body>
+
+</html>
