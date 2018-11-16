@@ -199,6 +199,7 @@ aside img {
     margin-right: 580px;
     color: white;
     font-family: comic sans ms, fantasy;
+  
 }
 
 nav {
@@ -312,11 +313,10 @@ strong {
 }
 
 
-
 #ErreurConnexion {
     position: relative;
-    bottom: 45px;
-    color: red;
+    bottom: 20px;
+
 
 }
 
@@ -504,14 +504,7 @@ strong {
     color: ghostwhite;
 }
 
-#deconnecter {
-    color: red;
-}
 
-
-#disconnect{
-    color: red;
-}
 
 #banniere_image_user {
     margin-top: 50px;
@@ -568,6 +561,11 @@ strong {
 
 
 
+
+
+/*      CHAT    */
+
+
 #Chat {
     background-color: aliceblue;
     position: absolute;
@@ -575,35 +573,87 @@ strong {
     right: 0px;
     color: black;
 
-    height: 410px;
-    width: 434px;
+   height: 375px;
+    width: 325px;
     overflow: auto;
 }
+
+
+#titre_chat {
+    text-align: center;
+    border-bottom: solid;
+}
+
 
 
 #zone_chat {
 
-    height: 300px;
-    width: 433px;
+    height: 200px;
+    width: 325px;
     overflow: auto;
-
-
+    
 }
+
+
+
 
 #saisieMessageChat {
     margin-right: 31px;
     margin-top: 52px;
     padding-left: 15px;
-    border: solid;
-    border-style: double;
+    border-top: solid;
+    
+
 
 }
 
 
 
 #Arrivant {
-    color: green;
+    color: forestgreen;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 70px;
+    border-radius: 25px;
+    background-color: lightblue;
 }
+
+
+
+#Affiche_message {
+    color: bisque;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 70px;
+    border-radius: 25px;
+    background-color: lightblue;
+}
+
+
+
+#deconnecter {
+    color: red;
+}
+
+
+#disconnect {
+    color: red;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-right: 70px;
+    border-radius: 25px;
+    background-color: lightblue;
+}
+
+
+
+
 
 
 

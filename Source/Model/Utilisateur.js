@@ -74,7 +74,7 @@ Utilisateur.prototype.getVille=function(){
 }
 
 
-Utilisateur.prototype.setVille=function(role){
+Utilisateur.prototype.setVille=function(ville){
     this.ville=ville;
 }
 

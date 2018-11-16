@@ -12,9 +12,9 @@
     <script type="text/javascript" src="../js/footer.js"></script>
     <script type="text/javascript" src="../js/Menu.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/EditProfil.js"></script>
 
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -55,20 +55,20 @@
                 <form method='POST' action='/Utilisateur/TraitementProfil'>
 
                     <div class="form-group row">
-                        <p><label id='NomUtil'>Nom: </label> <input type='text' id='Champs_Nom_Util' /><img src='../contenu/images/icons-modifier.png'>
+                        <p><label id='NomUtil'>Nom: </label> <input type='text' id='Champs_Nom_Util' value=" <%= nom  %>" /><img src='../contenu/images/icons-modifier.png'>
                         </p>
                     </div>
 
                     <div class="form-group row">
-                        <p><label id='PrenomUtil'>Prenom:</label><input type='text' id='Champs_Prenom_Util' /><img src='../contenu/images/icons-modifier.png'>
+                        <p><label id='PrenomUtil'>Prenom:</label><input type='text' id='Champs_Prenom_Util' value=" <%= prenom  %>" /><img src='../contenu/images/icons-modifier.png'>
                         </p>
                     </div>
 
                     <div class="form-group row">
-                        <p><label id='PrenomUtil'>Ville:</label><input type='text' id='Champs_Ville_Util' /><img src='../contenu/images/icons-modifier.png'>
+                        <p><label id='PrenomUtil'>Ville:</label><input type='text' id='Champs_Ville_Util' value=" <%=  ville  %>" /><img src='../contenu/images/icons-modifier.png'>
                         </p>
                     </div>
-                    <input class="btn btn-primary" id='modif' type="submit" value="Modifier">
+                    <input class="btn btn-primary" id='modif' type="submit" value="Modifier" disabled>
                 </form>
 
             </div>
@@ -80,7 +80,7 @@
 
 
         <aside id="Chat">
-
+            <h2 id="titre_chat">Chat</h2>
 
             <div id="zone_chat">
 
@@ -132,14 +132,14 @@
         //7)Reception message et affichage 
         socket.on('message', function(data) {
             if (data.prenom != prenomUtil) {
-                $('#zone_chat').append('<p><strong id="nom_user">' + data.prenom + ':</strong> ' + data.message + "</p>");
+                $('#zone_chat').append('<p  id="Affiche_message" class="border border-primary"><strong id="nom_user">' + data.prenom + ':</strong> ' + data.message + "</p>");
             }
 
         });
 
         //10)Reception de deconnection
         socket.on('deco', function(data) {
-            $('#zone_chat').append('<p  id="disconnect">' + data + "</p>");
+            $('#zone_chat').append('<p class="border border-primary" id="disconnect">' + data + "</p>");
         });
 
 
@@ -153,7 +153,7 @@
                 prenom: prenomUtil
             });
 
-            $('#zone_chat').append('<p><strong>' + prenomUtil + ':</strong> ' + message + "</p>");
+            $('#zone_chat').append('<p  id="Affiche_message" class="border border-primary"><strong>' + prenomUtil + ':</strong> ' + message + "</p>");
             $('#messageChat').val('').focus();
             return false;
         });
@@ -162,13 +162,13 @@
         //8)Deconnection
         $('#deconnecter').click(function() {
             socket.emit('discon', prenomUtil + '  a quitté le chat');
-            $('#zone_chat').append('<p id="disconnect">' + prenomUtil + " a quitté le chat  </p>");
+            $('#zone_chat').append('<p class="border border-primary" id="disconnect">' + prenomUtil + " a quitté le chat  </p>");
             $('#deconnecter').prop('disabled', "disabled");
         });
 
         //-------------------------- popUp -----------------------------------------------------------
-        
-        
+
+
         jQuery(function($) {
 
             //Lorsque vous cliquez sur un lien de la classe poplight
@@ -214,11 +214,11 @@
         });
 
     </script>
-    
+
     <script type="text/javascript">
-        
-        Menu()
-    
+        var prenom = "<%= prenom %>";
+        Menu(prenom)
+
     </script>
 
 
@@ -226,6 +226,12 @@
         footer()
 
     </script>
+
+    <script type="text/javascript">
+        editProfil()
+
+    </script>
+
 </body>
 
 </html>

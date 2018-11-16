@@ -9,7 +9,8 @@ function connexionBD(mysql) {
     mySqlClient = mysql.createConnection({
         host: "localhost",
         user: "root",
-        password: "najim",
+        //password: "najim",
+        password: "root",
         database: "gestionevent"
     });
 
@@ -55,9 +56,9 @@ function afficherTop(nombre) {
             }
 
             if (results.length > 0) {
-                
-               
-                
+
+
+
                 for (var i = 0; i < results.length; i++) {
                     var result = results[i];
 
@@ -76,7 +77,7 @@ function afficherTop(nombre) {
 
                 }
             }
-        
+
             resolve(res);
 
         })
@@ -93,12 +94,14 @@ function connexionUtilisateur(iden) {
     var utilisateur = new Utilisateur();
     var prenomTrouver = '';
     var mdpTrouver = '';
+    var nomTrouver = '';
+    var villeTrouver = '';
 
     utilisateur.setPrenom(prenomTrouver);
     utilisateur.setMots_de_passe(mdpTrouver);
 
 
-    var selectQuery = "SELECT Prenom,Mot_de_passe FROM gestionevent.utilisateur WHERE Email= ?";
+    var selectQuery = "SELECT Nom,Prenom,Ville,Mot_de_passe FROM gestionevent.utilisateur WHERE Email= ?";
 
     return new Promise((resolve, reject) =>
         mySqlClient.query(selectQuery, [iden], function select(error, results, fields) {
@@ -106,11 +109,15 @@ function connexionUtilisateur(iden) {
             if (results.length > 0) {
                 var result = results[0];
 
+                nomTrouver = result['Nom'];
                 prenomTrouver = result['Prenom'];
+                villeTrouver = result['Ville'];
                 mdpTrouver = result['Mot_de_passe'];
 
 
+                utilisateur.setNom(nomTrouver);
                 utilisateur.setPrenom(prenomTrouver);
+                utilisateur.setVille(villeTrouver);
                 utilisateur.setMots_de_passe(mdpTrouver);
 
 
@@ -131,6 +138,22 @@ function connexionUtilisateur(iden) {
 
 }
 
+
+
+//----------------------------------- Update Profil Utilisateur -------------------------------------
+
+function updateProfil(nouvNom, nouvPrenom, nouvVille) {
+
+
+
+
+
+}
+
+
+
+
+
 //----------------------------------- Afficher Evénements -------------------------------------
 
 function afficherEvent() {
@@ -139,7 +162,7 @@ function afficherEvent() {
     var selectQuery = "SELECT * FROM evenement";
 
     return new Promise((resolve, reject) =>
-        mySqlClient.query(selectQuery ,function select(error, results, fields) {
+        mySqlClient.query(selectQuery, function select(error, results, fields) {
 
             if (error) {
                 mySqlClient.end();
@@ -147,14 +170,14 @@ function afficherEvent() {
             }
 
             if (results.length > 0) {
-                
-                console.log('On va afficher les events!!!!!!!!!!!!!');
-                
+
+                console.log('On va afficher les events!!!!!!!');
+
                 for (var i = 0; i < results.length; i++) {
                     var result = results[i];
 
                     var evenement = new Evenement();
-                    
+
                     var nomEvenement = result['Nom_evenement'];
                     var lieu = result['Lieu'];
                     var dateEtHeure = result['Date_et_heure'];
@@ -168,16 +191,15 @@ function afficherEvent() {
                     evenement.setParticipants(participants);
                     evenement.setLien(lien);
                     evenement.setType(type);
-                    
+
                     res.push(evenement);
 
                 }
             }
-        
+
             resolve(res);
 
         })
     );
 
 }
-

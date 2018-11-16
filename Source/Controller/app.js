@@ -80,14 +80,7 @@ app.use(function (req, res, next) {
     if (typeof (req.resultsTop) == 'undefined') {
         req.resultsTop = [];
     }
-    /*
-    if (typeof (session.io ) == 'undefined') {
-        session.io = io;
-       // essayer session.io
-        console.log(io);
-    }
-    
-    */
+   
 
 
     next();
@@ -116,7 +109,6 @@ app.get('/', async function (req, res) {
         resultsTop: resultsTop,
          
         prenom: req.session.prenomUtilisateurConnecter
-        //mdp: req.session.mdpUtilisateurConnecter
     });
     
   

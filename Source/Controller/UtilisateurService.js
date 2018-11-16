@@ -101,6 +101,22 @@ router.use(function (req, res, next) {
         req.session.prenomUtilisateurConnecter = 'p';
     }
 
+
+    if (typeof (req.session.nomUtilisateurConnecter) == 'undefined') {
+        req.session.nomUtilisateurConnecter = 'p';
+    }
+    if (typeof (req.session.villeUtilisateurConnecter) == 'undefined') {
+        req.session.villeUtilisateurConnecter = 'p';
+    }
+
+
+
+
+
+
+
+
+
     server = req.app.get('server');
 
     io = req.app.get('socketio');
@@ -242,6 +258,8 @@ router.post('/TraitementConnexion', urlencodedParser, async function (req, res) 
 
     } else {
         req.session.prenomUtilisateurConnecter = utilisateur.getPrenom();
+        req.session.nomUtilisateurConnecter = utilisateur.getNom();
+        req.session.villeUtilisateurConnecter = utilisateur.getVille();
         res.redirect('/Utilisateur/PageUser');
 
     }
@@ -255,9 +273,13 @@ router.post('/TraitementConnexion', urlencodedParser, async function (req, res) 
 router.get('/PageUser', function (req, res) {
 
     var prenom = req.session.prenomUtilisateurConnecter;
+    var nom = req.session.nomUtilisateurConnecter;
+    var ville = req.session.villeUtilisateurConnecter;
 
     res.render('../../v1.0_View/html/Accueil_user.ejs', {
-        prenom: prenom
+        prenom: prenom,
+        nom: nom,
+        ville: ville
     });
 
 
@@ -311,6 +333,32 @@ router.get('/PageUser', function (req, res) {
     });
 
 });
+
+
+//---------------------------------------- Traitement Profil -----------------------------------------------
+
+
+
+router.get('TraitementProfil', function (req, res) {
+
+
+    vm.runInThisContext(contentBD);
+    connexionBD(mysql);
+
+    var nouvNom = req.body.Champs_Nom_Util;
+    var nouvPrenom = req.body.Champs_Prenom_Util;
+    var nouvVille = req.body.Champs_Ville_Util;
+
+    updateProfil(nouvNom, nouvPrenom, nouvVille);
+
+
+});
+
+
+
+
+
+
 
 
 
