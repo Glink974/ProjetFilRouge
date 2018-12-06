@@ -15,6 +15,10 @@ body {
     margin: auto;
 }
 
+#bloc_page p {
+  font-size: 1em;
+}
+
 #logo {
     width: 100px;
     height: 100px;
@@ -556,6 +560,165 @@ strong {
     width: 500px;
     overflow: auto;
     border-radius: 10px;
+}
+
+
+
+/*    Recherche par Nom      */
+
+
+#rechercheParNom {
+
+    display: none;
+    flex-direction: row;
+    position: absolute;
+    background-color: #706b64;
+    box-shadow: 0px 2px 5px #1c1a19;
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 150px;
+    padding-left: 50px;
+    margin-top: 20px;
+    margin-left: 350px;
+    margin-right: 50px;
+    color: white;
+    font-family: comic sans ms, fantasy;
+
+
+}
+
+#resultNom {
+
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    background-color: #706b64;
+    box-shadow: 0px 2px 5px #1c1a19;
+    border-radius: 5px;
+
+    margin-top: 20px;
+    margin-left: 350px;
+    margin-right: 50px;
+    padding-left: 20px;
+    padding-right: 150px;
+    padding-top: 20px;
+
+}
+
+#erreurResultNom {
+
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    background-color: #706b64;
+    box-shadow: 0px 2px 5px #1c1a19;
+    border-radius: 5px;
+    padding-top: 20px;
+    padding-bottom: 5px;
+    padding-right: 150px;
+    padding-left: 50px;
+    margin-top: 20px;
+    margin-left: 350px;
+    margin-right: 50px;
+
+    font-family: comic sans ms, fantasy;
+}
+
+#erreurResultNom strong {
+
+    color: rgb(255, 17, 17);
+}
+#resultNom p {
+
+    color: white;
+    font-family: comic sans ms, fantasy;
+}
+
+#Nom_Event {
+
+    color: black;
+}
+
+/*    Recherche par Date      */
+
+
+#rechercheParDate {
+
+    display: none;
+    flex-direction: row;
+    position: absolute;
+    background-color: #706b64;
+    box-shadow: 0px 2px 5px #1c1a19;
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 150px;
+    padding-left: 50px;
+    margin-top: 20px;
+    margin-left: 350px;
+    margin-right: 50px;
+    color: white;
+    font-family: comic sans ms, fantasy;
+
+
+}
+
+#resultDate {
+
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    background-color: #706b64;
+    box-shadow: 0px 2px 5px #1c1a19;
+    border-radius: 5px;
+
+    margin-top: 20px;
+    margin-left: 350px;
+    margin-right: 50px;
+    padding-left: 20px;
+    padding-right: 150px;
+    padding-top: 20px;
+}
+
+#erreurResultDate {
+
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    background-color: #706b64;
+    box-shadow: 0px 2px 5px #1c1a19;
+    border-radius: 5px;
+    padding-top: 20px;
+    padding-bottom: 5px;
+    padding-right: 150px;
+    padding-left: 50px;
+    margin-top: 20px;
+    margin-left: 350px;
+    margin-right: 50px;
+
+    font-family: comic sans ms, fantasy;
+}
+
+#erreurResultDate strong {
+
+    color: rgb(255, 17, 17);
+}
+
+#resultDate p {
+
+    color: white;
+    font-family: comic sans ms, fantasy;
+}
+
+#Date_Event {
+
+    color: black;
+}
+
+#rechercheParDate p {
+
+    color: dimgray;
 }
 
 
