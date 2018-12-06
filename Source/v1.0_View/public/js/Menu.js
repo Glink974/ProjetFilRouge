@@ -20,7 +20,12 @@ function Menu(prenom) {
     var a_rechNom = document.createElement("a");
     var text_rechNom = document.createTextNode("Rechercher par Nom");
 
-    a_rechNom.href = "#";
+
+    a_rechNom.id = "a_rechNom";
+
+    a_rechNom.href = "#rechNom";
+
+
 
     a_rechNom.appendChild(text_rechNom);
 
@@ -33,7 +38,8 @@ function Menu(prenom) {
     var a_rechDate = document.createElement("a");
     var text_rechDate = document.createTextNode("Rechercher par Date");
 
-    a_rechDate.href = "#";
+    a_rechDate.id = "a_rechDate";
+    a_rechDate.href = "#rechDate";
 
     a_rechDate.appendChild(text_rechDate);
 
@@ -73,7 +79,7 @@ function Menu(prenom) {
     ul.appendChild(li_retour);*/
 
     console.log(prenom);
-    
+
     if (prenom == 'p' || prenom == '') {
 
 
@@ -108,41 +114,28 @@ function Menu(prenom) {
         console.log(ul.childNodes[2]);
 
         for (var i = 0; i < ul.childElementCount; i++) {
-            var enfant= ul.childNodes[i];
-            
-            if (enfant== suppRechNom) {
+            var enfant = ul.childNodes[i];
+
+            if (enfant == suppRechNom) {
 
                 console.log('Vous êtes ici !!!!!');
                 ul.removeChild(ul.childNodes[i]);
-            
+
 
             }
-             if (enfant== suppRechDate) {
+            if (enfant == suppRechDate) {
 
                 console.log('Vous êtes ici !!!!!');
                 ul.removeChild(ul.childNodes[i]);
-            
+
 
             }
-            
-            
-            
-            
+
+
+
+
         }
-        /*
-    if ( (ul.childNodes[1] == suppRechNom)) {
-        
-        console.log('Vous êtes ici !!!!!');
 
-        suppRechNom.parentNode.removeChild(suppRechNom);
-
-        //ul.removeChild(ul.childNodes[1]);
-        //ul.removeChild(ul.childNodes[1]);
-
-
-    }
-
-*/
     }
 
 
