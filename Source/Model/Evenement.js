@@ -11,30 +11,44 @@ function Evenement(nom,lieu,date,participants,lien,type){
     
 }
 
+//--------------------- Constructeur sans argument -------------------------------
+
+function Evenement(){
+    this.nom='';
+    this.lieu='';
+
+    this.date= '';
+    this.participants=[];
+
+    this.lien='';
+    this.type='';
+
+}
+
 //-------------------- Getter --------------------------------------
 
 Evenement.prototype.getNom=function(){
-    return nom;
+    return this.nom;
 }
 
 Evenement.prototype.getLieu=function(){
-    return lieu;
+    return this.lieu;
 }
 
 Evenement.prototype.getDate=function(){
-    return date;
+    return this.date;
 }
 
 Evenement.prototype.getParticipants=function(){
-    return participants;
+    return this.participants;
 }
 
 Evenement.prototype.getLien=function(){
-    return lien;
+    return this.lien;
 }
 
 Evenement.prototype.getType=function(){
-    return type;
+    return this.type;
 }
 
 
