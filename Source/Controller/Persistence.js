@@ -9,8 +9,8 @@ function connexionBD(mysql) {
     mySqlClient = mysql.createConnection({
         host: "localhost",
         user: "root",
-        //password: "najim",
-        password: "root",
+        password: "najim",
+        //password: "root",
         database: "gestionevent"
     });
 
@@ -199,6 +199,111 @@ function afficherEvent() {
 
             resolve(res);
 
+        })
+    );
+
+}
+
+//----------------------------------- Recherche par Nom -------------------------------------
+
+function rechercherParNom(nom) {
+
+    var evenement = new Evenement();
+
+
+    var selectQuery = "SELECT * FROM evenement WHERE Nom_evenement = '" + nom + "' ";
+
+    return new Promise((resolve, reject) =>
+        mySqlClient.query(selectQuery, function select(error, results, fields) {
+
+            if (error) {
+                mySqlClient.end();
+                reject(error);
+            }
+
+            console.log(selectQuery);
+
+            if (results.length > 0) {
+
+                console.log('On va afficher la recherche par NOM !!!!!!!!!!!!!');
+
+                for (var i = 0; i < results.length; i++) {
+
+                    var result = results[i];
+
+
+                    nom = result['Nom_evenement'];
+                    var lieu = result['Lieu'];
+                    var dateEtHeure = result['date_et_heure'];
+                    var participants = result['Nombre_de_participants'];
+                    var lien = result['Liens'];
+                    var type = result['Type_d_evenement'];
+
+                    evenement.setNom(nom);
+                    evenement.setLieu(lieu);
+                    evenement.setDate(dateEtHeure);
+                    evenement.setParticipants(participants);
+                    evenement.setLien(lien);
+                    evenement.setType(type);
+
+                }
+            }
+
+            console.log(evenement);
+
+            resolve(evenement);
+        })
+    );
+
+}
+
+//----------------------------------- Recherche par Date -------------------------------------
+function rechercherParDate(date) {
+
+    var evenement = new Evenement();
+
+
+    var selectQuery = "SELECT * FROM evenement WHERE date_et_heure = '" + date + "' ";
+
+    return new Promise((resolve, reject) =>
+        mySqlClient.query(selectQuery, function select(error, results, fields) {
+
+            if (error) {
+                mySqlClient.end();
+                reject(error);
+            }
+
+            console.log(selectQuery);
+
+            if (results.length > 0) {
+
+                console.log('On va afficher la recherche par DATE !!!!!!!!!!!!!');
+
+                for (var i = 0; i < results.length; i++) {
+
+                    var result = results[i];
+
+
+                    var nom = result['Nom_evenement'];
+                    var lieu = result['Lieu'];
+                    date = result['date_et_heure'];
+                    var participants = result['Nombre_de_participants'];
+                    var lien = result['Liens'];
+                    var type = result['Type_d_evenement'];
+
+                    evenement.setNom(nom);
+                    evenement.setLieu(lieu);
+                    evenement.setDate(date);
+                    evenement.setParticipants(participants);
+                    evenement.setLien(lien);
+                    evenement.setType(type);
+
+                }
+            }
+
+            console.log(evenement);
+
+            resolve(evenement);
         })
     );
 

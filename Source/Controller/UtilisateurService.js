@@ -92,6 +92,9 @@ var transporter = nodemailer.createTransport({
 
 router.use(function (req, res, next) {
 
+    vm.runInThisContext(contentBD);
+    connexionBD(mysql);
+
     if (typeof (req.session.erreurs) == 'undefined') {
         req.session.erreurs = [""];
     }
@@ -110,7 +113,21 @@ router.use(function (req, res, next) {
     }
 
 
+    if (typeof (req.session.afficherRechNom) == 'undefined') {
+        req.session.afficherRechNom = 'false' ;
+    }
 
+    if (typeof (req.session.erreurRechNom) == 'undefined') {
+        req.session.erreurRechNom = 'false' ;
+    }
+
+    if (typeof (req.session.afficherRechDate) == 'undefined') {
+        req.session.afficherRechDate = 'false' ;
+    }
+
+    if (typeof (req.session.erreurRechDate) == 'undefined') {
+        req.session.erreurRechDate = 'false' ;
+    }
 
 
 
@@ -125,7 +142,10 @@ router.use(function (req, res, next) {
         session = req.app.get('session');
     session.io = io;
 
-
+    if (typeof (req.session.evenement) == 'undefined') {
+        var event = new Evenement();
+        req.session.evenement = event;
+    }
 
     next();
 });
@@ -270,16 +290,25 @@ router.post('/TraitementConnexion', urlencodedParser, async function (req, res) 
 
 //------------------------------------- Page Utilisateur-----------------------------------------
 
-router.get('/PageUser', function (req, res) {
+router.get('/PageUser', async function (req, res) {
 
     var prenom = req.session.prenomUtilisateurConnecter;
     var nom = req.session.nomUtilisateurConnecter;
     var ville = req.session.villeUtilisateurConnecter;
 
+    var resultsEvent = await afficherEvent();
+
     res.render('../../v1.0_View/html/Accueil_user.ejs', {
         prenom: prenom,
         nom: nom,
-        ville: ville
+        ville: ville,
+        evenement: req.session.evenement,
+        boolRech: req.session.afficherRechNom,
+        errRech: req.session.erreurRechNom,
+        boolRechD: req.session.afficherRechDate,
+        errRechD: req.session.erreurRechDate,
+        resultsEvent: resultsEvent
+
     });
 
 
