@@ -77,7 +77,159 @@
         <div id="menu">
         </div>
 
+        <div id="rechercheParNom" style="display: none;">
 
+            <form method="post" action="../Evenement/RechercherParNom">
+
+                <h1>RECHERCHER PAR NOM</h1><br />
+
+                <input list="listNom" type="search" placeholder="Entrez votre recherche..." name="Nom_Event" id="Nom_Event" autocomplete="off" />
+                <input id='boutonRechNom' type="submit" value="RECHERCHER">
+
+
+                <% if(resultsEvent.length > 0){ %>
+
+                    <datalist id="listNom">
+
+                        <% for(var i=0; i<resultsEvent.length; i++){ %>
+
+                            <option value="<%= resultsEvent[i].nom %>"></option>
+
+                        <% } %>
+                    </datalist>
+                <% } %>
+            </form>
+        </div>
+
+        <% if(errRech == 'true'){ %>
+            <% console.log(' --- PAS DANS LA LISTE') %>
+
+            <div id="erreurResultNom" style="display: flex;">
+
+                <p><strong> ERREUR -- EVENEMENT NON REPERTORIE </strong></p><br />
+                <p><strong> VEUILLEZ RECHERHCER UN EVENEMENT DE LA LISTE </strong></p>
+
+            </div>
+
+        <%}%>
+
+
+
+        <% if(evenement.nom != '') { %>
+
+            <div id="rechercheParNom">
+
+                <form method="post" action="../Evenement/RechercherParNom">
+
+                    <h1>RECHERCHER PAR NOM</h1><br />
+
+                    <input list="listNom" type="search" placeholder="Entrez votre recherche..." name="Nom_Event" id="Nom_Event" autocomplete="off" />
+                    <input id='boutonRechNom' type="submit" value="RECHERCHER"><br />
+
+                </form>
+
+            </div>
+        <%}%>
+
+            <% if(boolRech == 'true'){ %>
+
+            <div id="resultNom" style="display: flex;">
+                <% console.log(evenement.nom + ' --- AFFICHAGE DE LA RECHERHCE ') %>
+
+                <p><strong> NOM : </strong>
+                    <%= evenement.nom %> <br /></p>
+                <p><strong> LIEU : </strong>
+                    <%= evenement.lieu %>
+                </p>
+                <p><strong> DATE ET HEURE : </strong>
+                    <%= evenement.date %>
+                </p>
+                <p><strong> NOMBRE DE PARTICIPANTS : </strong>
+                    <%= evenement.participants %>
+                </p>
+                <p><strong> LIEN DIRECT : </strong> <a href="<%= evenement.lien %>">CLIQUEZ ICI</a></p>
+                <p><strong> TYPE EVENEMENT : </strong>
+                    <%= evenement.type %>
+                </p>
+
+                <button id="inscriptionEvent" type="button">Inscription Event</button>
+
+            </div>
+            <%}%>
+
+
+
+
+
+
+        <div id="rechercheParDate" style="display: none;">
+
+            <form method="post" action="../Evenement/RechercherParDate">
+
+                <h1>RECHERCHER PAR DATE</h1><br />
+
+                <input list="listDate" type="date" placeholder="Entrez votre date..." name="Date_Event" id="Date_Event" autocomplete="off" />
+                <input id='boutonRechDate' type="submit" value="RECHERCHER">
+
+                <% if(resultsEvent.length > 0){ %>
+
+                    <datalist id="listDate">
+
+                        <% for(var i=0; i<resultsEvent.length; i++){ %>
+
+                            <option value="<%= resultsEvent[i].date %>"></option>
+
+                        <% } %>
+                    </datalist>
+                <% } %>
+            </form>
+        </div>
+
+        <% if(errRechD == 'true'){ %>
+
+            <% console.log(' --- PAS DANS LA LISTE') %>
+
+            <div id="erreurResultDate" style="display: flex;">
+
+                <p><strong> ERREUR -- EVENEMENT NON REPERTORIE </strong></p><br />
+                <p><strong> VEUILLEZ RECHERHCER UN EVENEMENT DE LA LISTE </strong></p>
+
+            </div>
+
+        <%}%>
+
+        <% if((evenement.date != '') && (boolRechD == 'true')){ %>
+
+            <div id="rechercheParDate">
+
+                <form method="post" action="../Evenement/RechercherParDate">
+
+                    <h1>RECHERCHER PAR DATE</h1><br />
+
+                    <input list="listDate" type="date" placeholder="Entrez votre date..." name="Date_Event" id="Date_Event" autocomplete="off" />
+                    <input id='boutonRechDate' type="submit" value="RECHERCHER">
+                </form>
+            </div>
+
+            <div id="resultDate" style="display: flex;">
+
+                <p><strong> NOM : </strong>
+                    <%= evenement.nom %> <br /></p>
+                <p><strong> LIEU : </strong>
+                    <%= evenement.lieu %>
+                </p>
+                <p><strong> DATE ET HEURE : </strong>
+                    <%= evenement.date %>
+                </p>
+                <p><strong> NOMBRE DE PARTICIPANTS : </strong>
+                    <%= evenement.participants %>
+                </p>
+                <p><strong> LIEN DIRECT : </strong> <a href="<%= evenement.lien %>">CLIQUEZ ICI</a></p>
+                <p><strong> TYPE EVENEMENT : </strong>
+                    <%= evenement.type %></p>
+
+            </div>
+        <%}%>
 
         <aside id="Chat">
             <h2 id="titre_chat">Chat</h2>
@@ -104,7 +256,146 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js">
     </script>
 
+    <script type="text/javascript">
+        var prenom = "<%= prenom %>";
 
+
+        Menu(prenom)
+
+        //AFFICHER RECHERCHE NOM AU CLICK
+
+        var clickA = document.getElementById("a_rechNom");
+        var barreRech = document.getElementById("rechercheParNom");
+
+        var clickRech = document.getElementById("boutonRechNom");
+        var resultRech = document.getElementById("resultNom");
+        var messErrD = document.getElementById("erreurResultDate");
+        var messErr = document.getElementById("erreurResultNom");
+
+        var clickAd = document.getElementById("a_rechDate");
+        var barreRechDate = document.getElementById("rechercheParDate");
+
+        var clickRechD = document.getElementById("boutonRechDate");
+        var resultRechDate = document.getElementById("resultDate");
+
+
+        clickA.addEventListener("click", function() {
+
+
+            if (barreRech.style.display == "none") {
+
+                barreRech.style.display = "flex";
+                barreRechDate.style.display = "none";
+
+            }
+
+            if(resultRech){
+                console.log("ça passe par al !!!");
+                resultRech.style.display = "none";
+            }
+            if(resultRechDate){
+                console.log("ça passe par al !!!");
+                resultRechDate.style.display = "none";
+            }
+
+            if(messErrD){
+
+                console.log("YOOO");
+                messErrD.style.display = "none";
+            }
+
+            if(messErr){
+
+                console.log("YOOO");
+                messErr.style.display = "none";
+            }
+
+        });
+
+        clickRech.addEventListener("click", function() {
+
+
+            if (resultRech.style.display === "none") {
+
+                resultRech.style.display = "flex";
+
+
+            }
+
+            if (resultRech){
+
+                resultRech.style.display = "none";
+            }
+            if (resultRechDate){
+
+                resultRechDate.style.display = "none";
+            }
+
+        });
+
+        //AFFICHER RECHERCHE DATE AU CLICK
+
+        clickAd.addEventListener("click", function() {
+
+
+            if (barreRechDate.style.display == "none") {
+
+                barreRechDate.style.display = "flex";
+                barreRech.style.display = "none";
+            }
+
+            if(resultRechDate){
+                console.log("ça passe par al !!!");
+                resultRechDate.style.display = "none";
+            }
+
+            if(resultRech){
+                console.log("ça passe par al !!!");
+                resultRech.style.display = "none";
+            }
+
+            if(messErr){
+
+                console.log("YOOO");
+                messErr.style.display = "none";
+            }
+
+            if(messErrD){
+
+                console.log("YOOO");
+                messErrD.style.display = "none";
+            }
+
+
+        });
+
+        clickRechD.addEventListener("click", function() {
+
+            if (resultRechDate.style.display == "none") {
+
+                resultRechDate.style.display = "flex";
+
+
+            }
+
+            if (resultRechDate){
+
+                resultRechDate.style.display = "none";
+            }
+
+            if (resultRech){
+
+                resultRech.style.display = "none";
+            }
+
+
+
+
+
+
+        });
+
+    </script>
 
 
 
@@ -212,12 +503,6 @@
 
 
         });
-
-    </script>
-
-    <script type="text/javascript">
-        var prenom = "<%= prenom %>";
-        Menu(prenom)
 
     </script>
 
